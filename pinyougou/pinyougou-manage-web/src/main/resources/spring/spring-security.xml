@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!--配置那些资源是不需要登录则可以进行访问的-->
+    <http pattern="/css/**" security="none"/>
+    <http pattern="/img/**" security="none"/>
+    <http pattern="/js/**" security="none"/>
+    <http pattern="/plugins/**" security="none"/>
+    <http pattern="/login.html" security="none"/>
+
+    <!--配置那些资源是需要进行认证后访问的；如果为true的话；那么里面的限定都需要添加类似hasRole()-->
+    <http use-expressions="false">
+        <!--配置资源-->
+        <intercept-url pattern="/**" access="ROLE_USER"/>
+
+        <!--登录配置-->
+        <form-login login-page="/login.html" default-target-url="/admin/index.html"
+                    authentication-failure-url="/login.html" always-use-default-target="true"/>
+
+        <!--配置禁止跨站点伪造-->
+        <csrf disabled="true"/>
+
+        <!--设置允许内嵌框架-->
+        <headers>
+            <frame-options policy="SAMEORIGIN"/>
+        </headers>
+
+        <!--退出-->
+        <logout/>
+
+    </http>
+
+    <!--配置认证管理器-->
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="admin" authorities="ROLE_USER" password="123456"/>
+                <user name="itcast" authorities="ROLE_USER" password="123456"/>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+</beans:beans>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="itcast-security-cas:war">
+    <output-path>$PROJECT_DIR$/itcast-security-cas/target</output-path>
+    <root id="archive" name="itcast-security-cas-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="itcast-security-cas:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angularJS测试</title>
+    <script src="js/angular.min.js"></script>
+    <script>
+        //定义模块；参数1：模块名称（与ng-app对应）；参数2：如果以后有其它模块的话那么可以在里面列举
+        var app = angular.module("app",[]);
+
+        //定义处理器
+        //参数1：处理器名称（ng-controller中名字一致），参数2：处理器执行体（指定各种操作方法）
+        //$scope 上下文；可以获取在视图中双向绑定的那些表单项，或者$scope定义的任何东西都可以在视图中引用
+        app.controller("myController", function ($scope) {
+
+            $scope.add = function () {
+                return parseInt($scope.x) + parseInt($scope.y);
+            };
+        });
+    </script>
+</head>
+<body ng-app="app" ng-controller="myController" >
+
+x=<input ng-model="x"><br>
+y=<input ng-model="y"><br>
+
+<br>
+x+y={{add()}}
+</body>
+</html>
